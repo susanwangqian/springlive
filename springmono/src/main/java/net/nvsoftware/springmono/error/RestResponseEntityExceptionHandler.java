@@ -10,11 +10,20 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 @ControllerAdvice
 public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
+  // specific error: ProductNotFoundException
   @ExceptionHandler(ProductNotFoundException.class)
   @ResponseBody
   @ResponseStatus(HttpStatus.NOT_FOUND)
   public ErrorMsg productNotFoundHandler(ProductNotFoundException e) {
     ErrorMsg errorMsg = new ErrorMsg(HttpStatus.NOT_FOUND, e.getMessage());
+    return errorMsg;
+  }
+  // general error: Exception
+  @ExceptionHandler(Exception.class)
+  @ResponseBody
+  @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+  public ErrorMsg genericException(Exception e) {
+    ErrorMsg errorMsg = new ErrorMsg(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
     return errorMsg;
   }
 }
