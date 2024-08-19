@@ -1,9 +1,13 @@
-package net.nvsoftware.springmono.model;
+package net.nvsoftware.springmono.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
-public class Product {
-//  @JsonIgnore
+@Entity
+@Table(name="product_tb")
+public class ProductEntity {
+  @Id
   private String productId;
   private String title;
   private String description;
@@ -27,6 +31,7 @@ public class Product {
   public String getDescription() {
     return description;
   }
+
   public void setDescription(String description) {
     this.description = description;
   }
